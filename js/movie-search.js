@@ -48,7 +48,7 @@ var movieSearch = {
           }        
         },
       },
-      poster: `<span><label class=poster-lbl><b>Poster: </b></label><input id=posterDsply${movieSearch.count} class=poster-dsply type=image src=${movieObj.Poster}></span>`
+      poster: `<input id=posterDsply${movieSearch.count} class=poster-dsply type=image src=${movieObj.Poster}></span>`
     };
     // <label htmlFor="posterDsply"><b>Poster: </b> </label>     
     movieSearch.movieEl.insertAdjacentHTML("beforeend", movieHtmlCntnr.fieldset);
