@@ -72,7 +72,7 @@ var movieSearch = {
       let frmttdTitle = movieSearch.titleEl.value.trim().replace(/ /g, "+");
       let year = movieSearch.yearEl.value.trim();
       let plot = movieSearch.plotEl.value;
-      let url = `http://www.omdbapi.com/?t=${frmttdTitle}&y=${year}&plot=${plot}&apikey=da73a73`;
+      let url = `https://www.omdbapi.com/?t=${frmttdTitle}&y=${year}&plot=${plot}&apikey=da73a73`;
             
       AsyncJs.get(url)
       .then((response) => {
