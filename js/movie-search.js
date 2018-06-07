@@ -7,9 +7,7 @@ var movieSearch = {
   resetEl: document.querySelector("#reset"),
   movieEl: document.querySelector("#movie"),
   display: (movieObj) => {
-    movieSearch.count++;
-    console.log(Object.values(movieObj));
-    console.log(Object.keys(movieObj));
+    movieSearch.count++;    
     
     let movieHtmlCntnr = {
       fieldset: `<fieldset id=movieFldst${movieSearch.count} class=movie-fieldset><legend style="font-size: 1.25em"><b>Movie Number ${movieSearch.count}</b></legend></fieldset>`,
@@ -29,20 +27,13 @@ var movieSearch = {
       plot: `<span id=plotDsply${movieSearch.count} class=plot-dsply><b>Plot: </b> ${movieObj.Plot}</span>`,
       awards: `<span id=awardsDsply${movieSearch.count} class=awards-dsply><b>Awards: </b> ${movieObj.Awards}</span>`,      
       ratings: {
-        string: () => {
-          let rtngsStrng = [];
-          for (el of movieObj.Ratings) {
-            console.log(el);
-          }
-          console.log(rtngsStrng);
-          return rtngsStrng;
-        },
         html: (count) => {
           let cnt = 0,
               ratingsDsplyEl = document.getElementById("ratingsDsply" + count);
           
           for (el of movieObj.Ratings) {
-            let ratingsString = `${el.Source}: ${el.Value}`;      
+            let ratingsString = `${el.Source}: ${el.Value}`;
+            // PlwJs.createSpan() is called from plwjs-module.js
             ratingsDsplyEl.appendChild(PlwJs.createSpan("rtngs" + cnt, "rtngs", ratingsString));
             cnt++;
           }        
@@ -50,12 +41,11 @@ var movieSearch = {
       },
       poster: `<input id=posterDsply${movieSearch.count} class=poster-dsply type=image src=${movieObj.Poster}></span>`
     };
-    // <label htmlFor="posterDsply"><b>Poster: </b> </label>     
+    
     movieSearch.movieEl.insertAdjacentHTML("beforeend", movieHtmlCntnr.fieldset);
     document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.snglLn);
     document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.mltLn);
     for (key in foundMovieHtml) {
-      console.log(key);
       if (key == "writer" || key == "plot" || key == "poster" || key == "actors" || key == "awards") {
         document.getElementById(`mltLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", foundMovieHtml[key]);
       } else if (key == "ratings") {
@@ -73,10 +63,10 @@ var movieSearch = {
       let plot = movieSearch.plotEl.value;
       let url = `https://www.omdbapi.com/?t=${frmttdTitle}&y=${year}&plot=${plot}&apikey=da73a73`;
             
+      // called from ajax-module.js
       AsyncJs.get(url)
       .then((response) => {
         let movieObj = JSON.parse(response);
-        console.log(movieObj);        
         return movieSearch.display(movieObj);
       }, 
       (error) => {
