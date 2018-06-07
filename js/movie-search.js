@@ -7,8 +7,9 @@ var movieSearch = {
   resetEl: document.querySelector("#reset"),
   movieEl: document.querySelector("#movie"),
   display: (movieObj) => {
-    movieSearch.count++;    
-    
+    console.log(movieObj);
+    movieSearch.count++;
+
     let movieHtmlCntnr = {
       fieldset: `<fieldset id=movieFldst${movieSearch.count} class=movie-fieldset><legend style="font-size: 1.25em"><b>Movie Number ${movieSearch.count}</b></legend></fieldset>`,
       snglLn: `<div id=snglLnCntnr${movieSearch.count} class=sngl-ln-cntnr></div>`,
@@ -42,17 +43,23 @@ var movieSearch = {
       poster: `<input id=posterDsply${movieSearch.count} class=poster-dsply type=image src=${movieObj.Poster}></span>`
     };
     
-    movieSearch.movieEl.insertAdjacentHTML("beforeend", movieHtmlCntnr.fieldset);
-    document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.snglLn);
-    document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.mltLn);
-    for (key in foundMovieHtml) {
-      if (key == "writer" || key == "plot" || key == "poster" || key == "actors" || key == "awards") {
-        document.getElementById(`mltLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", foundMovieHtml[key]);
-      } else if (key == "ratings") {
-        document.getElementById(`mltLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", `<span id=ratingsDsply${movieSearch.count} class=ratings-dsply><b>Ratings: </b>`);
-        foundMovieHtml.ratings.html(movieSearch.count);
-      } else {
-        document.getElementById(`snglLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", foundMovieHtml[key]);
+    console.log(movieObj.Response);
+    if (movieObj.Response == "False") {
+      movieSearch.movieEl.insertAdjacentHTML("beforeend", movieHtmlCntnr.fieldset);
+      document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", `${movieObj.Error} Try a different title and/or year combination.`);
+    } else {      
+      movieSearch.movieEl.insertAdjacentHTML("beforeend", movieHtmlCntnr.fieldset);
+      document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.snglLn);
+      document.getElementById(`movieFldst${movieSearch.count}`).insertAdjacentHTML("beforeend", movieHtmlCntnr.mltLn);
+      for (key in foundMovieHtml) {
+        if (key == "writer" || key == "plot" || key == "poster" || key == "actors" || key == "awards") {
+          document.getElementById(`mltLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", foundMovieHtml[key]);
+        } else if (key == "ratings") {
+          document.getElementById(`mltLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", `<span id=ratingsDsply${movieSearch.count} class=ratings-dsply><b>Ratings: </b>`);
+          foundMovieHtml.ratings.html(movieSearch.count);
+        } else {
+          document.getElementById(`snglLnCntnr${movieSearch.count}`).insertAdjacentHTML("beforeend", foundMovieHtml[key]);
+        }
       }
     }
   },
@@ -83,6 +90,7 @@ var movieSearch = {
 };
 
 var init = (() => {
+  PlwJs.dimOff();
   movieSearch.listener();
 })();
 
