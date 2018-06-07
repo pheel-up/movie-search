@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Search with OMDb API</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <header>
+      <h1>Movie Search with OMDb API</h1>
+    </header>
+    <div class="content">
+      <div class="form">
+        <span>
+            <label>Title:</label>
+            <input type="text" id="title" value="Cool Hand Luke"/>
+        </span>
+        <span>
+            <label>Year:</label>
+            <input type="text" id="year" value="1967"/>
+        </span>
+        <span>
+            <label htmlFor="plot">Plot:</label>
+            <select type="text" id="plot">
+              <option value="short" selected>Short</option> 
+              <option value="full">Full</option>
+            </select>
+        </span>        
+        <span>
+            <button id="search">Search</button>
+            <button id="reset">Reset</button>
+        </span>
+      </div>      
+    </div>
+    <div id="movie"></div>
+  <script src="js/ajax-module.js"></script>
+  <script src="js/plwJs-module.js"></script>
+  <script src="js/movie-search.js"></script>
+  </body>
+</html>
