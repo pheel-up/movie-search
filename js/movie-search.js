@@ -27,8 +27,7 @@ var movieSearch = {
       production: `<span id=prodDsply${movieSearch.count} class=prod-dsply><b>Production: </b>  ${movieObj.Production}</span>`,
       runtime: `<span id=runtimeDsply${movieSearch.count} class=runtime-dsply><b>Runtime: </b>  ${movieObj.Runtime}</span>`,
       plot: `<span id=plotDsply${movieSearch.count} class=plot-dsply><b>Plot: </b> ${movieObj.Plot}</span>`,
-      awards: `<span id=awardsDsply${movieSearch.count} class=awards-dsply><b>Awards: </b> ${movieObj.Awards}</span>`,
-      // ${movieObj.Ratings[0].Source}: ${movieObj.Ratings[0].Value}${movieObj.Ratings[1].Source}: ${movieObj.Ratings[1].Value}${movieObj.Ratings[2].Source}: ${movieObj.Ratings[2].Value}
+      awards: `<span id=awardsDsply${movieSearch.count} class=awards-dsply><b>Awards: </b> ${movieObj.Awards}</span>`,      
       ratings: {
         string: () => {
           let rtngsStrng = [];
